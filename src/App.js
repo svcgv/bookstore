@@ -1,9 +1,9 @@
 import React from 'react'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Welcome from './WelcomePage'
-import Login from './Login'
-import NotFound from './NotFound'
-import HomePage from './HomePage'
+import Welcome from './Pages/WelcomePage'
+import Login from './Pages/Login'
+import NotFound from './Pages/NotFound'
+import HomePage from './Pages/HomePage'
 
 
 function App() {
