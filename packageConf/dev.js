@@ -44,7 +44,7 @@ module.exports = {
     devServer: {
         hot: true,
         inline: true,
-        port : 80
+        port : 8090
     },
     plugins: [
       new webpack.NoErrorsPlugin(),
