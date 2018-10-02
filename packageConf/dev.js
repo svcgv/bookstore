@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, 'app');
+var ROOT_PATH = path.resolve('./');
+var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 // var htmlWebpackPlugin =  require('html-webpack-plugin');
 
@@ -14,6 +14,7 @@ module.exports = {
         path: BUILD_PATH,
         filename: "bundle.js"
     },
+    
     module: {
         loaders: [
             {
@@ -33,13 +34,21 @@ module.exports = {
                 loader: 'url?limit=40000'
             },
             {
-                test: /\.js$/, loader:'react-hot-loader/webpack',
+                test: /\.js$/, 
+                loader:'react-hot-loader/webpack',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loaders:  ['style-loader', 'css-loader' ]
             }
         ]
     },
     resolve:{
-        extensions:['','.js','.json']
+        extensions:['','.js','.json'],
+        alias: {
+            STATIC: path.join(APP_PATH, '/Static'),
+        }
     },
     devServer: {
         hot: true,
