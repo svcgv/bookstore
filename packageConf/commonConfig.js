@@ -45,6 +45,7 @@ module.exports = {
     resolve:{
         alias: {
             STATIC: path.join(APP_PATH, '/Static'),
+            UTILS: path.join(APP_PATH, '/Utils'),
         },
         extensions:['','.js','.json']
     },
