@@ -77,16 +77,13 @@ const styles = theme => ({
 });
 
 const sections = [
-  'Technology',
-  'Design',
-  'Culture',
-  'Business',
-  'Politics',
-  'Opinion',
-  'Science',
-  'Health',
-  'Style',
-  'Travel',
+  '技术栈',
+  '随笔',
+  '记事本',
+  '一个萝卜一个坑',
+  'Leetcode',
+  '照片墙',
+  'Secret',
 ];
 
 const featuredPosts = [
@@ -131,7 +128,7 @@ function Blog(props) {
       <CssBaseline />
       <div className={classes.layout}>
         <Toolbar className={classes.toolbarMain}>
-          <Button size="small">Subscribe</Button>
+          {/* <Button size="small">Subscribe</Button> */}
           <Typography
             component="h2"
             variant="headline"
@@ -140,7 +137,7 @@ function Blog(props) {
             noWrap
             className={classes.toolbarTitle}
           >
-            Blog
+            何奔的个人小站
           </Typography>
           <IconButton>
             <SearchIcon />
@@ -163,11 +160,10 @@ function Blog(props) {
               <Grid item md={6}>
                 <div className={classes.mainFeaturedPostContent}>
                   <Typography variant="display2" color="inherit" gutterBottom>
-                    Title of a longer featured blog post
+                    可能这个网站
                   </Typography>
                   <Typography variant="headline" color="inherit" paragraph>
-                    Multiple lines of text that form the lede, informing new readers quickly and
-                    efficiently about what&apos;s most interesting in this post&apos;s contents…
+                    大概也能算是暗网的一部分？毕竟搜索引擎里面找不到，而且也不会推广
                   </Typography>
                 </div>
               </Grid>
@@ -209,38 +205,10 @@ function Blog(props) {
           {/* End sub featured posts */}
           <Grid container spacing={40} className={classes.mainGrid}>
             {/* Main content */}
-            <Grid item xs={12} md={8}>
-              <Typography variant="title" gutterBottom>
-                From the Firehose
-              </Typography>
-              <Divider />
-              
-            </Grid>
+            
             {/* End main content */}
             {/* Sidebar */}
-            <Grid item xs={12} md={4}>
-              <Paper elevation={0} className={classes.sidebarAboutBox}>
-                <Typography variant="title" gutterBottom>
-                  About
-                </Typography>
-                <Typography>
-                  Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit
-                  amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
-                </Typography>
-              </Paper>
-              <Typography variant="title" gutterBottom className={classes.sidebarSection}>
-                Archives
-              </Typography>
-              {archives.map(archive => (
-                <Typography key={archive}>{archive}</Typography>
-              ))}
-              <Typography variant="title" gutterBottom className={classes.sidebarSection}>
-                Social
-              </Typography>
-              {social.map(network => (
-                <Typography key={network}>{network}</Typography>
-              ))}
-            </Grid>
+            
             {/* End sidebar */}
           </Grid>
         </main>
@@ -248,10 +216,10 @@ function Blog(props) {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="title" align="center" gutterBottom>
-          Footer
+          end
         </Typography>
         <Typography variant="subheading" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          designed by hb1230123@hotmail.com
         </Typography>
       </footer>
       {/* End footer */}

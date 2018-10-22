@@ -20,10 +20,10 @@ class Welcome extends React.Component{
     render(){
         return(
             <div>
-                 <Link to='/login'> link</Link> 
+                 {/* <Link to='/login'> link</Link> 
                  <Button variant="raised" color="primary" onClick = {this.click}>
                    login
-                </Button>
+                </Button> */}
                 <A />
             </div>
         )

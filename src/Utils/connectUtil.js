@@ -1,11 +1,9 @@
 
 
     const baseURL = 'http://127.0.0.1:9080'
-    /**
-     * $1:地址，$2:参数，$3:成功回调，$4:失败回调，$5:请求方式（默认post），方式$6:超时时间
-     * 报文封装,请求参数
-     */
-    function fetchConnect  (url,params,successCallBack,failCallBack,type,timeOut){
+
+
+    function fetchConnect(url,params,successCallBack,failCallBack,type,timeOut){
         const header = getHeader()
         const success = successCallBack?successCallBack:defaultSuccessCall
         const fail = failCallBack?failCallBack:defaultFailCall
@@ -13,36 +11,60 @@
         const reqType = type?type:'POST'
         const outTime = timeOut?timeOut:3000
         const fullURL = baseURL+url
-        var myInit = { method: reqType,
-                headers: header,
-                body: {REQ_HEADER:{},REQ_BODY:options},
-                mode: 'cors',
-                cache: 'default' };
-        fetch(fullURL, myInit)
-            .then(//增加网络正常返回，但业务逻辑错误的判断
-                function(response){
-                    console.log(response)
-                    response.json().then(json => {
-                        console.log(json.result)
-                  })
-                    if(response.RSP_HEADER === '1'){
-                        success(response.RSP_BODY)
-                    }
-                    else{
-                        fail(response.RSP_BODY)
-                    }
-                }
-            )
-            .then(
-                function(response){
-                    console.log(response)
+
+        var init = {
+            method: reqType,
+            header: header,
+            body: reqType === 'POST'?params:null,
+            mode: 'cors',
+            cache: 'no-store'
+        }
+
+        var req = fetch(fullURL,init)
+
+    }
+    /**
+     * $1:地址，$2:参数，$3:成功回调，$4:失败回调，$5:请求方式（默认post），方式$6:超时时间
+     * 报文封装,请求参数
+     */
+    // function fetchConnect  (url,params,successCallBack,failCallBack,type,timeOut){
+    //     const header = getHeader()
+    //     const success = successCallBack?successCallBack:defaultSuccessCall
+    //     const fail = failCallBack?failCallBack:defaultFailCall
+    //     const options = params?params:{}
+    //     const reqType = type?type:'POST'
+    //     const outTime = timeOut?timeOut:3000
+    //     const fullURL = baseURL+url
+    //     var myInit = { method: reqType,
+    //             headers: header,
+    //             body: {REQ_HEADER:{},REQ_BODY:options},
+    //             mode: 'cors',
+    //             cache: 'default' };
+    //     fetch(fullURL, myInit)
+    //         .then(//增加网络正常返回，但业务逻辑错误的判断
+    //             function(response){
+    //                 console.log(response)
+    //                 response.json().then(json => {
+    //                     console.log(json.result)
+    //               })
+    //                 if(response.RSP_HEADER === '1'){
+    //                     success(response.RSP_BODY)
+    //                 }
+    //                 else{
+    //                     fail(response.RSP_BODY)
+    //                 }
+    //             }
+    //         )
+    //         .then(
+    //             function(response){
+    //                 console.log(response)
                     
-                        fail(response)
-                }
-            )
+    //                     fail(response)
+    //             }
+    //         )
         
        
-    }
+    // }
 
     /**
      * $1:地址，$2:参数，$3:成功回调，$4:失败回调，$5:请求方式（默认post），方式$6:超时时间
@@ -105,6 +127,7 @@
         //Todo 设置跨域请求头
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.get('Content-Type');
+        myHeaders.append('Accept-Language', 'zh-CN')
         return myHeaders;
     }
 
