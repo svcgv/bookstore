@@ -3,26 +3,36 @@ var webpack = require('webpack');
 var ROOT_PATH = path.resolve('./');
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-    entry: [
-      "./src/index.js"
-    ],
+    entry: {
+        main: ['babel-polyfill', './src/index.js'],
+        vendor: [
+            'react',
+            'react-dom',
+            'redux',
+            'react-router-dom',
+            'axios'
+        ]
+        },
     output: {
         path: BUILD_PATH,
-        filename: "bundle.js"
+        filename: "bundle.js",
+        chunkFilename: '[name].[chunkhash:5].chunk.js'
     },
-    
+
     module: {
-        loaders: [
+        loaders: [ 
+            
             {
-              test: /\.js$/,
-              exclude: /node_modules/,
-              loader: "babel-loader",
-              query:
-                {
-                  presets:['react','es2015','stage-2']
-                }
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                query: {
+                    presets: ['react', 'es2015', 'stage-2']
+                },
+                plugins: ["transform-es2015-arrow-functions","syntax-dynamic-import"]
             }, {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass'],
@@ -32,25 +42,26 @@ module.exports = {
                 loader: 'url?limit=40000'
             },
             {
-                test: /\.js$/, 
-                loader:'react-hot-loader/webpack',
-                exclude: /node_modules/
-            },
-            {
                 test: /\.css$/,
                 loaders:  ['style-loader', 'css-loader' ]
             }
         ]
     },
-    resolve:{
+    resolve: {
         alias: {
             STATIC: path.join(APP_PATH, '/Static'),
             UTILS: path.join(APP_PATH, '/Utils'),
         },
-        extensions:['','.js','.json']
+        extensions: ['', '.js', '.json']
     },
     plugins: [
-      new webpack.NoErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin()
+        new webpack.NoErrorsPlugin(),
+        new BundleAnalyzerPlugin({ analyzerPort: 8919 }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'],
+            minChunks: Infinity,
+            filename: 'common.bundle.js',
+          })
+        
     ]
 };
