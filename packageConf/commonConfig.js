@@ -1,9 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var ROOT_PATH = path.resolve('./');
+var ROOT_PATH = path.resolve('./')
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -56,12 +57,14 @@ module.exports = {
     },
     plugins: [
         new webpack.NoErrorsPlugin(),
-        new BundleAnalyzerPlugin({ analyzerPort: 8919 }),
+        new BundleAnalyzerPlugin({ analyzerPort: 9999 }),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
             minChunks: Infinity,
             filename: 'common.bundle.js',
-          })
-        
+          }),
+         new HtmlWebpackPlugin({
+             template:path.join(__dirname,'index.html')
+         })
     ]
 };
