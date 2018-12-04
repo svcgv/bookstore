@@ -1,5 +1,0 @@
-console.log('asdasd')
-var a = ()=>{
-    console.log('sadasd112aaaaaaaaaaaa')
-}
-a()

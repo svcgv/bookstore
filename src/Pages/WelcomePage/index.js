@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import A from './Blog'
 import connect from '../../Utils/connectUtil'
-import B from './b'
 
 
 class Welcome extends React.Component{
@@ -23,7 +22,6 @@ class Welcome extends React.Component{
     render(){
         return(
             <div>
-                <B />
                  {/* <Link to='/login'> link</Link> 
                  <Button variant="raised" color="primary" onClick = {this.click}>
                    login
