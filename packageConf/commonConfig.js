@@ -57,7 +57,7 @@ module.exports = {
     },
     plugins: [
         new webpack.NoErrorsPlugin(),
-        new BundleAnalyzerPlugin({ analyzerPort: 9999 }),
+        //new BundleAnalyzerPlugin({ analyzerPort: 9999 }),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
             minChunks: Infinity,
