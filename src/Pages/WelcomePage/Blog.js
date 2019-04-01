@@ -76,14 +76,12 @@ const styles = theme => ({
   },
 });
 
-const sections = [
-  '技术栈',
-  '随笔',
-  '记事本',
-  '一个萝卜一个坑',
-  'Leetcode',
-  '照片墙',
-  'Secret',
+const sections =[
+  {title:'技术栈',key:'technology',url:'#/technology'},
+  {title:'随笔',key:'weekdays',url:'#/weekdays'},
+  {title:'记事本',key:'notes',url:'#/notes'},
+  {title:'Leetcode笔记',key:'leetCode',url:'#/leetCode'},
+  {title:'照片墙',key:'photos',url:'#/photos'}
 ];
 
 const featuredPosts = [
@@ -103,39 +101,29 @@ const featuredPosts = [
 
 
 
-const archives = [
-  'March 2020',
-  'February 2020',
-  'January 2020',
-  'December 2019',
-  'November 2019',
-  'October 2019',
-  'September 2019',
-  'August 2019',
-  'July 2019',
-  'June 2019',
-  'May 2019',
-  'April 2019',
-];
+class Blog extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      classes:this.props.classes
+    }
+  }
+ 
+render(){
 
-const social = ['GitHub', 'Twitter', 'Facebook'];
-
-function Blog(props) {
-  const { classes } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <div className={classes.layout}>
-        <Toolbar className={classes.toolbarMain}>
-          {/* <Button size="small">Subscribe</Button> */}
+      <div className={this.state.classes.layout}>
+        <Toolbar className={this.state.classes.toolbarMain}>
           <Typography
             component="h2"
             variant="headline"
             color="inherit"
             align="center"
             noWrap
-            className={classes.toolbarTitle}
+            className={this.state.classes.toolbarTitle}
           >
             何奔的个人小站
           </Typography>
@@ -146,19 +134,20 @@ function Blog(props) {
             <Link to='/login'>Login</Link>
           </Button>
         </Toolbar>
-        <Toolbar variant="dense" className={classes.toolbarSecondary}>
+        <Toolbar variant="dense" className={this.state.classes.toolbarSecondary}>
           {sections.map(section => (
-            <Typography color="inherit" noWrap key={section}>
-              {section}
-            </Typography>
+            <a href={section.url}>
+              <Typography color="inherit" noWrap key={section.key} >
+                {section.title}
+              </Typography>
+            </a>
           ))}
         </Toolbar>
         <main>
-          {/* Main featured post */}
-          <Paper className={classes.mainFeaturedPost}>
+          <Paper className={this.state.classes.mainFeaturedPost}>
             <Grid container>
               <Grid item md={6}>
-                <div className={classes.mainFeaturedPostContent}>
+                <div className={this.state.classes.mainFeaturedPostContent}>
                   <Typography variant="display2" color="inherit" gutterBottom>
                     可能这个网站
                   </Typography>
@@ -169,13 +158,11 @@ function Blog(props) {
               </Grid>
             </Grid>
           </Paper>
-          {/* End main featured post */}
-          {/* Sub featured posts */}
-          <Grid container spacing={40} className={classes.cardGrid}>
+          <Grid container spacing={40} className={this.state.classes.cardGrid}>
             {featuredPosts.map(post => (
-              <Grid item key={post.title} xs={12} md={6}>
-                <Card className={classes.card}>
-                  <div className={classes.cardDetails}>
+              <Grid item key={post.title} xs={12} md={6} key={post.title}>
+                <Card className={this.state.classes.card}>
+                  <div className={this.state.classes.cardDetails}>
                     <CardContent>
                       <Typography component="h2" variant="headline">
                         {post.title}
@@ -193,7 +180,7 @@ function Blog(props) {
                   </div>
                   <Hidden xsDown>
                     <CardMedia
-                      className={classes.cardMedia}
+                      className={this.state.classes.cardMedia}
                       image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len
                       title="Image title"
                     />
@@ -202,29 +189,18 @@ function Blog(props) {
               </Grid>
             ))}
           </Grid>
-          {/* End sub featured posts */}
-          <Grid container spacing={40} className={classes.mainGrid}>
-            {/* Main content */}
-            
-            {/* End main content */}
-            {/* Sidebar */}
-            
-            {/* End sidebar */}
-          </Grid>
         </main>
       </div>
-      {/* Footer */}
-      <footer className={classes.footer}>
+      <footer className={this.state.classes.footer}>
         <Typography variant="title" align="center" gutterBottom>
-          end
+          
         </Typography>
         <Typography variant="subheading" align="center" color="textSecondary" component="p">
-          designed by hb1230123@hotmail.com
+          powerd by hb1230123@hotmail.com
         </Typography>
       </footer>
-      {/* End footer */}
     </React.Fragment>
-  );
+  );}
 }
 
 Blog.propTypes = {
